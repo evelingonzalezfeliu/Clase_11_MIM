@@ -38,8 +38,8 @@ Copia el siguiente contenido:
 ```bash
 #!/bin/bash
 #SBATCH --job-name=annovar_15
-#SBATCH --output=annovar.%A_%a.out
-#SBATCH --error=annovar.%A_%a.err
+#SBATCH --output=logs/annovar.%A_%a.out
+#SBATCH --error=logs/annovar.%A_%a.err
 #SBATCH --array=1-15
 #SBATCH --time=05:00:00
 #SBATCH --nodes=1
