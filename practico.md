@@ -75,7 +75,8 @@ perl "$ANNOVAR" "$VCF" "$DB" \
     -nastring . \
     -polish \
     -otherinfo \
-    -remove
+    -remove  \
+    > "logs/${MUESTRA}.annovar.log" 2>&1
 ```
 
 Guarda con `Ctrl + O`, presiona `Enter` y sal con `Ctrl + X`.
