@@ -299,3 +299,83 @@ write.table(
 ```
 
 El archivo `ADN_variants.tsv` quedará en la carpeta de trabajo. Estas son variantes **germinales**, aunque utilicemos el formato MAF y las herramientas de maftools para organizarlas.
+
+## 6. Revisar las clasificaciones y visualizar las variantes
+
+### Revisar las clasificaciones disponibles y los genes
+
+```r
+table(annovar$CLNSIG)
+table(annovar$Hugo_Symbol)
+```
+
+### Seleccionar variantes patogénicas y columnas para discutir
+
+```r
+patogenicas <- annovar[
+  !is.na(CLNSIG) & CLNSIG == "Pathogenic"
+]
+
+columnas <- c(
+  "Tumor_Sample_Barcode",
+  "Hugo_Symbol",
+  "Chromosome",
+  "Start_Position",
+  "Reference_Allele",
+  "Tumor_Seq_Allele2",
+  "Variant_Classification",
+  "aaChange",
+  "gnomad41_exome_AF",
+  "gnomad41_genome_AF",
+  "avsnp151",
+  "CLNSIG",
+  "CLNREVSTAT",
+  "CLNDN",
+  "REVEL_score",
+  "SIFT_pred"
+)
+
+# Seleccionar las columnas disponibles en la tabla
+patogenicas_discusion <- patogenicas[
+  , intersect(columnas, names(patogenicas)),
+  with = FALSE
+]
+
+View(patogenicas_discusion)
+```
+
+Aunque el formato MAF utiliza nombres como `Tumor_Sample_Barcode`, aquí corresponden a nuestras muestras germinales.
+
+### Resumen general y distribución en las proteínas
+
+Los siguientes gráficos utilizan **todas las variantes del objeto `laml`**, no solo las patogénicas.
+
+```r
+plotmafSummary(
+  maf = laml,
+  rmOutlier = TRUE,
+  addStat = "median",
+  dashboard = TRUE,
+  titvRaw = FALSE
+)
+
+lollipopPlot(
+  maf = laml,
+  gene = "BRCA1",
+  AACol = "aaChange",
+  showMutationRate = FALSE
+)
+
+lollipopPlot(
+  maf = laml,
+  gene = "BRCA2",
+  AACol = "aaChange",
+  showMutationRate = FALSE
+)
+```
+
+### Preguntas para discutir
+
+- ¿Qué muestras presentan variantes clasificadas como patogénicas?
+- ¿Qué consecuencia funcional tienen estas variantes?
+- ¿Cuál es su frecuencia poblacional?
