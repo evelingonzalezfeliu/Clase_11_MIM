@@ -10,8 +10,7 @@ Pensado para personas que no vienen del área bioinformática: cada paso explica
 2. Explorar los VCFs generados por Strelka2.
 3. Enviar trabajos con SLURM (`sbatch`).
 4. Anotar variantes con **ANNOVAR** (anotación funcional general).
-5. Anotar variantes con **CPSR** (predisposición a cáncer).
-6. Comparar los resultados de ambas herramientas.
+6. Revisión de los resultados con Rstudio.
 
 ## Contenido
 
