@@ -192,3 +192,32 @@ En el ejemplo mostrado encontramos:
 4. ¿Esperarías una puntuación REVEL para una variante intrónica?
 
 En el siguiente paso importaremos las tablas en **R**, seleccionaremos las columnas relevantes y priorizaremos variantes.
+
+## 4. Crear una sesión de R e instalar maftools
+
+1. Ingresar a [Kutral](https://kutral-auth.uoh.cl/) con sus credenciales.
+2. Crear una sesión de RStudio y abrirla.
+3. Ejecutar los siguientes comandos en la consola de **R**.
+
+### Instalar maftools
+
+```r
+# Instalar BiocManager si no está disponible
+if (!requireNamespace("BiocManager", quietly = TRUE)) {
+  install.packages("BiocManager", repos = "https://cloud.r-project.org")
+}
+
+# Instalar maftools si no está disponible
+if (!requireNamespace("maftools", quietly = TRUE)) {
+  BiocManager::install("maftools", update = FALSE, ask = FALSE)
+}
+```
+
+### Cargar el paquete y verificar la instalación
+
+```r
+library(maftools)
+packageVersion("maftools")
+```
+
+Si el paquete se carga sin errores y muestra su versión, podemos continuar con el análisis de los archivos anotados con ANNOVAR.
