@@ -17,7 +17,7 @@ ls ~/strelka_persample/*.variants.vcf.gz | wc -l
 **Resultado esperado:**
 
 ```text
-83
+15
 ```
 
 ## 2. Anotar variantes con ANNOVAR
