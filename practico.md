@@ -221,3 +221,81 @@ packageVersion("maftools")
 ```
 
 Si el paquete se carga sin errores y muestra su versión, podemos continuar con el análisis de los archivos anotados con ANNOVAR.
+
+## 5. Importar las anotaciones de ANNOVAR en R
+
+Convertiremos los archivos anotados a formato MAF y los combinaremos en una tabla.
+
+### Definir el directorio de trabajo
+
+**Cambiar la ruta por la de su propia carpeta de trabajo.**
+
+```r
+library(maftools)
+
+setwd("~/practico_variantes")
+```
+
+### Buscar los archivos anotados
+
+```r
+filenames <- Sys.glob("output/*hg38_multianno.txt")
+
+# Verificar cuántos archivos encontramos: deben ser 15
+length(filenames)
+```
+
+### Convertir los archivos a formato MAF
+
+```r
+annovar_mafs <- lapply(
+  filenames,
+  annovarToMaf,
+  table = "ensGene",
+  ens2hugo = FALSE,
+  refBuild = "hg38"
+)
+
+# Combinar las tablas de todas las muestras
+annovar <- data.table::rbindlist(annovar_mafs, fill = TRUE)
+```
+
+### Crear el objeto de maftools
+
+Definimos las consecuencias que incluiremos en el resumen de variantes no sinónimas.
+
+```r
+vcNames <- c(
+  "Frame_Shift_Del",
+  "Frame_Shift_Ins",
+  "In_Frame_Del",
+  "In_Frame_Ins",
+  "Missense_Mutation",
+  "Nonsense_Mutation",
+  "Nonstop_Mutation"
+)
+
+variantes_maf <- read.maf(
+  maf = annovar,
+  vc_nonSyn = vcNames
+)
+```
+
+**Nota:** `Silent` corresponde a variantes sinónimas, por eso no se incluye en `vcNames`. Las categorías de MAF describen consecuencias funcionales; no indican por sí solas patogenicidad.
+
+### Revisar y guardar la tabla combinada
+
+```r
+dim(annovar)
+head(annovar[, 1:10])
+
+write.table(
+  annovar,
+  file = "ADN_variants.tsv",
+  sep = "\t",
+  row.names = FALSE,
+  quote = FALSE
+)
+```
+
+El archivo `ADN_variants.tsv` quedará en la carpeta de trabajo. Estas son variantes **germinales**, aunque utilicemos el formato MAF y las herramientas de maftools para organizarlas.
