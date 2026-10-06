@@ -279,6 +279,8 @@ variantes_maf <- read.maf(
   maf = annovar,
   vc_nonSyn = vcNames
 )
+laml= read.maf(maf = annovar, vc_nonSyn = vcNames) # Lee el MAF combinado y genera un resumen utilizando las categorías de mutaciones especificadas.
+
 ```
 
 **Nota:** `Silent` corresponde a variantes sinónimas, por eso no se incluye en `vcNames`. Las categorías de MAF describen consecuencias funcionales; no indican por sí solas patogenicidad.
