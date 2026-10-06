@@ -195,7 +195,7 @@ En el siguiente paso importaremos las tablas en **R**, seleccionaremos las colum
 
 ## 4. Crear una sesión de R e instalar maftools
 
-1. Ingresar a [Kutral](https://kutral-auth.uoh.cl/) con sus credenciales.
+1. Ingresar a [Kutral](http://kutral-auth.uoh.cl/) con sus credenciales.
 2. Crear una sesión de RStudio y abrirla.
 3. Ejecutar los siguientes comandos en la consola de **R**.
 
