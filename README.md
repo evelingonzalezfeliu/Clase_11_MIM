@@ -1,6 +1,6 @@
 # Clase_11_MIM
 
-Práctico de la **Clase 11** del magíster (Universidad de Chile): anotación de variantes germinales a partir de VCFs de **Strelka2**, usando **ANNOVAR** y **CPSR** en un clúster con **SLURM**.
+Práctico de la **Clase 11** del magíster (Universidad de Chile): anotación de variantes germinales a partir de VCFs de **Strelka2**, usando **ANNOVAR** en un clúster con **SLURM**.
 
 Pensado para personas que no vienen del área bioinformática: cada paso explica qué hace cada comando.
 
