@@ -15,7 +15,6 @@ Pensado para personas que no vienen del área bioinformática: cada paso explica
 ## Contenido
 
 - [`practico.md`](practico.md): guía paso a paso del taller.
-- `scripts/`: scripts SLURM (`run_annovar.bash`, `run_CPSR.bash`).
 
 ## Requisitos
 
